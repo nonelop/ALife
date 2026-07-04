@@ -15,7 +15,7 @@ pub struct Point {
 }
 
 impl Point {
-    fn total_points(radius: i32) -> Vec<Point> {
+    fn get_points(radius: i32) -> Vec<Point> {
         let mut total_points: Vec<Point> = Vec::new();
 
         for y in (-radius..=radius).rev() {
@@ -41,7 +41,7 @@ impl World {
     pub fn new(radius: i32) -> World {
         let mut world = World {
             radius,
-            points: Point::total_points(radius),
+            points: Point::get_points(radius),
         };
 
         for i in &mut world.points {
@@ -63,7 +63,7 @@ impl World {
     pub fn random_food(&mut self) {
         let mut rng = rand::thread_rng();
 
-        let usable_points_quantity = self.points.len() as f32 - self.points.len() as f32 * 0.99;
+        let usable_points_quantity = self.points.len() as f32 - self.points.len() as f32 * 0.60;
         let food_quantity = rng.gen_range(1.0..usable_points_quantity) as usize;
         let mut indexes: Vec<usize> = vec![0; food_quantity];
 
