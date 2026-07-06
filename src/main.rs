@@ -17,7 +17,7 @@ fn main() {
     println!("\x1B[2J");
 
     loop {
-        thread::sleep(Duration::from_millis(750));
+        thread::sleep(Duration::from_millis(450));
 
         println!("\x1B[H");
 

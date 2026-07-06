@@ -29,7 +29,7 @@ impl Cell {
     }
     pub fn movement(&mut self, world: &mut World) {
         let inputs: &[f32] = &[
-            self.energy / 100.0,
+            self.energy / 100.00,
             self.nearest_food(world, self.x, self.y + 1),
             self.nearest_food(world, self.x, self.y - 1),
             self.nearest_food(world, self.x - 1, self.y),
@@ -41,6 +41,7 @@ impl Cell {
             x: self.x,
             y: self.y,
             content: Content::Empty,
+            smell: 0.0,
         };
 
         match action {
