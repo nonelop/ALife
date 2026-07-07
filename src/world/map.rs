@@ -4,6 +4,7 @@ use rand::{self, Rng};
 pub enum Content {
     Empty,
     Food,
+    Cell,
     Border,
 }
 
@@ -76,6 +77,16 @@ impl World {
         for i in &indexes {
             if self.points[*i].content == Content::Empty {
                 self.points[*i].content = Content::Food;
+                
+            }
+        }
+    }
+    pub fn update(&mut self) {
+        for y in (-self.radius..self.radius).rev() {
+            for x in -self.radius..self.radius {
+                if self.get_point(x, y).content == Content::Cell {
+                    self.get_point(x, y).content = Content::Empty;
+                }
             }
         }
     }

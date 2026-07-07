@@ -24,6 +24,7 @@ impl Cell {
         match point.content {
             Content::Empty => return 0.0,
             Content::Food => return 1.0,
+            Content::Cell => return -10.0,
             Content::Border => return -1.0,
         }
     }
@@ -71,6 +72,8 @@ impl Cell {
             self.energy += 5.0;
             world.get_point(self.x, self.y).content = Content::Empty;
         }
+
+        world.get_point(self.x, self.y).content = Content::Cell
 
     }
 }

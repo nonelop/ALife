@@ -21,7 +21,8 @@ fn main() {
 
         println!("\x1B[H");
 
-        render_map(&world, &cell0);
+        render_map(&world);
+        world.update();
 
         cell0.movement(&mut world);
         println!(
