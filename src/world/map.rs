@@ -77,7 +77,13 @@ impl World {
         for i in &indexes {
             if self.points[*i].content == Content::Empty {
                 self.points[*i].content = Content::Food;
-                
+
+                // Значения запаха близлежащих клеток
+                self.get_point(self.points[*i].x, self.points[*i].y).smell = 1.0;
+                self.get_point(self.points[*i].x, self.points[*i].y + 1).smell = 0.5;
+                self.get_point(self.points[*i].x, self.points[*i].y - 1).smell = 0.5;
+                self.get_point(self.points[*i].x - 1, self.points[*i].y).smell = 0.5;
+                self.get_point(self.points[*i].x + 1, self.points[*i].y).smell = 0.5;
             }
         }
     }

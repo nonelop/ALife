@@ -58,10 +58,6 @@ impl Network {
             current_signals = layer.forward(&current_signals);
         }
 
-        // for i in 0..current_signals.len() {
-        //     println!("NN | CS: {}", current_signals[i]);
-        // }
-
         if current_signals.is_empty() {
             return 0;
         }

@@ -18,23 +18,13 @@ impl Cell {
         }
     }
 
-    fn nearest_food(&self, world: &World, x: i32, y: i32) -> f32 {
-        let point = world.get_imut_point(x, y);
-
-        match point.content {
-            Content::Empty => return 0.0,
-            Content::Food => return 1.0,
-            Content::Cell => return -10.0,
-            Content::Border => return -1.0,
-        }
-    }
     pub fn movement(&mut self, world: &mut World) {
         let inputs: &[f32] = &[
             self.energy / 100.00,
-            self.nearest_food(world, self.x, self.y + 1),
-            self.nearest_food(world, self.x, self.y - 1),
-            self.nearest_food(world, self.x - 1, self.y),
-            self.nearest_food(world, self.x + 1, self.y),
+            world.get_point(self.x, self.y + 1).smell,
+            world.get_point(self.x, self.y - 1).smell,
+            world.get_point(self.x + 1, self.y).smell,
+            world.get_point(self.x, self.y - 1).smell,
         ];
 
         let action = self.brain.decide(inputs);
