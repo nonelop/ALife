@@ -14,7 +14,7 @@ impl Cell {
             x: coordinates.0,
             y: coordinates.1,
             energy: 100.0,
-            brain: Network::new(&[5, 10, 4]),
+            brain: Network::new(&[5, 20, 4]),
         }
     }
 

@@ -56,17 +56,17 @@ impl World {
         world
     }
     pub fn get_point(&mut self, x: i32, y: i32) -> &mut Point {
-        let index = ((self.radius - y) * (self.radius * 2 + 1)).abs() + (x + self.radius);
+        let index = ((self.radius - y) * (self.radius * 2 + 1)) + (x + self.radius);
         &mut self.points[index as usize]
     }
     pub fn get_imut_point(&self, x: i32, y: i32) -> &Point {
-        let index = ((self.radius - y) * (self.radius * 2 + 1)).abs() + (x + self.radius);
+        let index = ((self.radius - y) * (self.radius * 2 + 1))+ (x + self.radius);
         &self.points[index as usize]
     }
     pub fn random_food(&mut self) {
         let mut rng = rand::thread_rng();
 
-        let usable_points_quantity = self.points.len() as f32 - self.points.len() as f32 * 0.60;
+        let usable_points_quantity = self.points.len() as f32 - self.points.len() as f32 * 0.80;
         let food_quantity = rng.gen_range(1.0..usable_points_quantity) as usize;
         let mut indexes: Vec<usize> = vec![0; food_quantity];
 
@@ -77,14 +77,18 @@ impl World {
         for i in &indexes {
             if self.points[*i].content == Content::Empty {
                 self.points[*i].content = Content::Food;
-
-                // Значения запаха близлежащих клеток
-                self.get_point(self.points[*i].x, self.points[*i].y).smell = 1.0;
-                self.get_point(self.points[*i].x, self.points[*i].y + 1).smell = 0.5;
-                self.get_point(self.points[*i].x, self.points[*i].y - 1).smell = 0.5;
-                self.get_point(self.points[*i].x - 1, self.points[*i].y).smell = 0.5;
-                self.get_point(self.points[*i].x + 1, self.points[*i].y).smell = 0.5;
+                self.add_smell_around(self.points[*i].x, self.points[*i].y);
             }
+        }
+    }
+    fn add_smell_around(&mut self, x: i32, y: i32) {
+        self.get_point(x, y).smell = 1.0;
+
+        for (dx, dy) in [(0, 1), (0, -1), (-1, 0), (1, 0)] {
+            self.get_point(x + dx, y + dy).smell = 0.5
+        }
+        for (dx, dy) in [(-1, 1), (1, 1), (-1, -1), (1, -1)] {
+            self.get_point(x + dx, y + dy).smell = 0.2
         }
     }
     pub fn update(&mut self) {
