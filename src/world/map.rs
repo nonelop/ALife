@@ -66,12 +66,14 @@ impl World {
     pub fn random_food(&mut self) {
         let mut rng = rand::thread_rng();
 
-        let usable_points_quantity = self.points.len() as f32 - self.points.len() as f32 * 0.80;
-        let food_quantity = rng.gen_range(1.0..usable_points_quantity) as usize;
-        let mut indexes: Vec<usize> = vec![0; food_quantity];
+        let food_quantity = self.points.len() as f32 - self.points.len() as f32 * 0.80;
+        let mut indexes: Vec<usize> = Vec::new();
 
-        for i in 0..food_quantity {
-            indexes[i] = rng.gen_range(0..self.points.len());
+        let mut i = 0;
+
+        while i != food_quantity as i32{
+            indexes.push(rng.gen_range(0..self.points.len()));
+            i += 1;
         }
 
         for i in &indexes {
