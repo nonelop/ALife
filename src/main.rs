@@ -28,6 +28,6 @@ fn main() {
         println!(
             "\nCELL | X: {} Y: {} | ENERGY: {}",
             cell0.x, cell0.y, cell0.energy
-        )
+        );
     }
 }

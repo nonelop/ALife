@@ -26,7 +26,7 @@ impl Point {
                     x,
                     y,
                     content: Content::Empty,
-                    smell: 0.0
+                    smell: 0.0,
                 });
             }
         }
@@ -50,6 +50,7 @@ impl World {
         for i in &mut world.points {
             if i.x == -radius || i.x == radius || i.y == -radius || i.y == radius {
                 i.content = Content::Border;
+                i.smell = -10.0;
             }
         }
 
@@ -60,7 +61,7 @@ impl World {
         &mut self.points[index as usize]
     }
     pub fn get_imut_point(&self, x: i32, y: i32) -> &Point {
-        let index = ((self.radius - y) * (self.radius * 2 + 1))+ (x + self.radius);
+        let index = ((self.radius - y) * (self.radius * 2 + 1)) + (x + self.radius);
         &self.points[index as usize]
     }
     pub fn random_food(&mut self) {
@@ -71,7 +72,7 @@ impl World {
 
         let mut i = 0;
 
-        while i != food_quantity as i32{
+        while i != food_quantity as i32 {
             indexes.push(rng.gen_range(0..self.points.len()));
             i += 1;
         }
@@ -87,17 +88,25 @@ impl World {
         self.get_point(x, y).smell = 1.0;
 
         for (dx, dy) in [(0, 1), (0, -1), (-1, 0), (1, 0)] {
-            self.get_point(x + dx, y + dy).smell = 0.5
+            self.get_point(x + dx, y + dy).smell += 0.5
         }
         for (dx, dy) in [(-1, 1), (1, 1), (-1, -1), (1, -1)] {
-            self.get_point(x + dx, y + dy).smell = 0.2
+            self.get_point(x + dx, y + dy).smell += 0.2
         }
     }
     pub fn update(&mut self) {
         for y in (-self.radius..self.radius).rev() {
             for x in -self.radius..self.radius {
+                self.get_point(x, y).smell = 0.0;
+            }
+        }
+        for y in (-self.radius..self.radius).rev() {
+            for x in -self.radius..self.radius {
                 if self.get_point(x, y).content == Content::Cell {
                     self.get_point(x, y).content = Content::Empty;
+                }
+                if self.get_point(x, y).content == Content::Food {
+                    self.add_smell_around(x, y);
                 }
             }
         }
