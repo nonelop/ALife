@@ -13,7 +13,7 @@ pub fn render_map(world: &World) {
 }
 
 fn get_smell_color(smell: f32) -> (u8, u8, u8) {
-    let max_val = 1.0;
+    let max_val = 1.2;
 
     let gray = 60;
 
@@ -37,7 +37,7 @@ fn point_render(point: &Point) {
             "{}",
             "$ ".on_custom_color(get_smell_color(point.smell)).black()
         ),
-        Content::Cell => print!("{}", "()".on_black().white()),
-        Content::Border => print!("{}", "  ".on_red().black()),
+        Content::Cell => print!("{}", "@ ".on_black().white()),
+        Content::Border => print!("{}", "# ".on_custom_color((30, 30, 30)).black()),
     }
 }

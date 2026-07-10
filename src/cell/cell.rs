@@ -5,7 +5,7 @@ pub struct Cell {
     pub x: i32,
     pub y: i32,
     pub energy: f32,
-    neural_network: Network,
+    pub neural_network: Network,
 }
 
 impl Cell {
@@ -68,6 +68,7 @@ impl Cell {
             world.get_point(self.x, self.y).content = Content::Empty;
         }
 
-        world.get_point(self.x, self.y).content = Content::Cell
+        world.get_point(self.x, self.y).content = Content::Cell;
+
     }
 }
