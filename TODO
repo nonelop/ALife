@@ -1,3 +1,5 @@
-Что сделать нужна
-
-РЕФАКТОР ИНГ map.rs и cell.rs и в целом ВСЕГО
+- [ ] Move simulation to 3D
+- [ ] Change all coordinates from i32 to f32
+- [ ] Implement geometry module
+- [ ] Implement chunk system
+- [ ] Configure simulation ticks
