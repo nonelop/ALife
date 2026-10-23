@@ -1,43 +1,46 @@
-use colored::Colorize;
+// This part was archived because doesn't supported a new 3D simulation
+// To be deleted soon
 
-use crate::world::map::{Content, Point, World};
+// use colored::Colorize;
 
-pub fn render_map(world: &World) {
-    for y in (-world.radius..=world.radius).rev() {
-        for x in -world.radius..=world.radius {
-            let point = world.get_imut_point(x as i32, y as i32);
-            point_render(point);
-        }
-        print!("\n");
-    }
-}
+// use crate::world::map::{Content, Point, World};
 
-fn get_smell_color(smell: f32) -> (u8, u8, u8) {
-    let max_val = 1.2;
+// pub fn render_map(world: &World) {
+//     for y in (-world.radius..=world.radius).rev() {
+//         for x in -world.radius..=world.radius {
+//             let point = world.get_imut_point(x as i32, y as i32);
+//             point_render(point);
+//         }
+//         print!("\n");
+//     }
+// }
 
-    let gray = 60;
+// fn get_smell_color(smell: f32) -> (u8, u8, u8) {
+//     let max_val = 1.2;
 
-    if smell <= 0.0 {
-        return (gray, gray, gray);
-    } else {
-        let factor = (smell / max_val).min(1.0);
+//     let gray = 60;
 
-        let r = (gray as f32 * (1.0 - factor)) as u8;
-        let g = (gray as f32 + (200.0 - gray as f32) * factor) as u8;
-        let b = (gray as f32 * (1.0 - factor)) as u8;
+//     if smell <= 0.0 {
+//         return (gray, gray, gray);
+//     } else {
+//         let factor = (smell / max_val).min(1.0);
 
-        (r, g, b)
-    }
-}
+//         let r = (gray as f32 * (1.0 - factor)) as u8;
+//         let g = (gray as f32 + (200.0 - gray as f32) * factor) as u8;
+//         let b = (gray as f32 * (1.0 - factor)) as u8;
 
-fn point_render(point: &Point) {
-    match point.content {
-        Content::Empty => print!("{}", "  ".on_custom_color(get_smell_color(point.smell))),
-        Content::Food => print!(
-            "{}",
-            "$ ".on_custom_color(get_smell_color(point.smell)).black()
-        ),
-        Content::Cell => print!("{}", "@ ".on_black().white()),
-        Content::Border => print!("{}", "# ".on_custom_color((30, 30, 30)).black()),
-    }
-}
+//         (r, g, b)
+//     }
+// }
+
+// fn point_render(point: &Point) {
+//     match point.content {
+//         Content::Empty => print!("{}", "  ".on_custom_color(get_smell_color(point.smell))),
+//         Content::Food => print!(
+//             "{}",
+//             "$ ".on_custom_color(get_smell_color(point.smell)).black()
+//         ),
+//         Content::Cell => print!("{}", "@ ".on_black().white()),
+//         Content::Border => print!("{}", "# ".on_custom_color((30, 30, 30)).black()),
+//     }
+// }

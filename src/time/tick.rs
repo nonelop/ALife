@@ -1,4 +1,3 @@
-use crate::view::render_map;
 use crate::world::map::World;
 use crate::cell::cell::Cell;
 
@@ -8,7 +7,6 @@ pub fn tick(world: &mut World, cells: &mut Vec<Cell>) {
 
     // World
 
-    render_map(world);
     world.update();
 
     // Cells
