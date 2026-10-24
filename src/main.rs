@@ -12,8 +12,8 @@ use geometry::unit::unit_enum::GeometryUnits;
 
 fn main() {
 
-    let centimeter = GeometryUnits::Centimeter(100.0);
-    println!("Centimeters: {:?} Meters: {:?}", centimeter, centimeter.to_meters());
+    let meter = GeometryUnits::Meter(100.0);
+    println!("meter: {:?} base: {:?}", meter, meter.to_base_unit());
 
     let mut world = World::new(15);
     world.random_food();
