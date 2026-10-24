@@ -1,3 +1,1 @@
-pub fn tick() {
-
-}
+pub fn tick() {}
