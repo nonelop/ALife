@@ -15,30 +15,13 @@ pub enum GeometryUnits {
 impl GeometryUnits {
     pub fn to_base_unit(&self) -> Self {
 
-        let meters: f64 = match self.to_meters() {
-            GeometryUnits::Meter(v) => v,
-            _ => panic!()
-        };
-
         match BASE_GEOMETRY_UNIT {
-            GeometryUnits::Nanometer(_v) => {
-                GeometryUnits::Nanometer(meters * 10_f64.powi(9))
-            }
-            GeometryUnits::Micrometer(_v) => {
-                GeometryUnits::Micrometer(meters * 10_f64.powi(6))
-            }
-            GeometryUnits::Millimeter(_v) => {
-                GeometryUnits::Millimeter(meters * 10_f64.powi(3))
-            }
-            GeometryUnits::Centimeter(_v) => {
-                GeometryUnits::Centimeter(meters * 100.0)
-            }
-            GeometryUnits::Meter(_v) => {
-                self.to_meters()
-            }
-            GeometryUnits::Kilometer(_v) => {
-                GeometryUnits::Kilometer(meters / 1000.0)
-            }
+            GeometryUnits::Nanometer(_v) => self.to_nanos(),
+            GeometryUnits::Micrometer(_v) => self.to_micros(),
+            GeometryUnits::Millimeter(_v) => self.to_millis(),
+            GeometryUnits::Centimeter(_v) => self.to_centis(),
+            GeometryUnits::Meter(_v) => self.to_meters(),
+            GeometryUnits::Kilometer(_v) => self.to_kilos()
         }
     }
 
@@ -64,4 +47,50 @@ impl GeometryUnits {
             }
         }
     }
+
+    pub fn to_nanos(&self) -> Self {
+        let meters: f64 = match self.to_meters() {
+            GeometryUnits::Meter(v) => v,
+            _ => panic!()
+        };
+
+        GeometryUnits::Nanometer(meters * 10_f64.powi(9))
+    }
+
+    pub fn to_micros(&self) -> Self {
+        let meters: f64 = match self.to_meters() {
+            GeometryUnits::Meter(v) => v,
+            _ => panic!()
+        };
+
+        GeometryUnits::Micrometer(meters * 10_f64.powi(6))
+    }
+
+    pub fn to_millis(&self) -> Self {
+        let meters: f64 = match self.to_meters() {
+            GeometryUnits::Meter(v) => v,
+            _ => panic!()
+        };
+
+        GeometryUnits::Millimeter(meters * 10_f64.powi(3))
+    }
+
+    pub fn to_centis(&self) -> Self {
+        let meters: f64 = match self.to_meters() {
+            GeometryUnits::Meter(v) => v,
+            _ => panic!()
+        };
+
+        GeometryUnits::Centimeter(meters * 100.0)
+    }
+
+    pub fn to_kilos(&self) -> Self {
+        let meters: f64 = match self.to_meters() {
+            GeometryUnits::Meter(v) => v,
+            _ => panic!()
+        };
+
+        GeometryUnits::Kilometer(meters / 1000.0)
+    }
+
 }
