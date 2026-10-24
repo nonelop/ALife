@@ -1,4 +1,3 @@
-- [ ] Implement geometry module
 - [ ] Move simulation to 3D
 - [ ] Change all coordinates from i32 to f32
 - [ ] Implement chunk system

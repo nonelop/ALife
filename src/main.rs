@@ -21,6 +21,6 @@ fn main() {
     loop {
         thread::sleep(Duration::from_millis(450));
 
-        tick(&mut world);
+        tick();
     }
 }

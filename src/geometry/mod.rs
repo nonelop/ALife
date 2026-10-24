@@ -1,3 +1,3 @@
-pub mod calculate;
+pub mod point;
 pub mod shape;
 pub mod unit;
