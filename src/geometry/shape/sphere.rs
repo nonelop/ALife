@@ -5,14 +5,16 @@ use crate::geometry::unit::unit_enum::GeometryUnits;
 #[derive(Debug, Clone, Copy)]
 pub struct Sphere {
     pub center: Point3,
-    pub radius: GeometryUnits,
+    pub radius: f64,
 }
 
 impl Sphere {
     pub fn new(position: Point3, radius: GeometryUnits) -> Result<Self, GeometryErrors> {
-        if radius.get_value_in_meters() <= 0.0 {
+        let radius = radius.to_base_unit().get_value_in_base();
+        
+        if radius <= 0.0 {
             return Err(GeometryErrors::InvalidSizeValue(
-                radius.get_value_in_meters(),
+                radius,
             ));
         }
 

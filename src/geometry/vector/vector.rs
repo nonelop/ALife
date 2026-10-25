@@ -1,6 +1,27 @@
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Vector3 {
     pub x: f64,
     pub y: f64,
     pub z: f64,
+}
+
+impl Vector3 {
+    pub fn normalize(&self) -> Self {
+        let vector_lengh = self.length();
+
+        if vector_lengh > 0.0 {
+            let nx = self.x / vector_lengh;
+            let ny = self.y / vector_lengh;
+            let nz = self.z / vector_lengh;
+
+            Vector3 { x: nx, y: ny, z: nz }
+        }
+        else {
+            *self
+        }
+    }
+
+    pub fn length(&self) -> f64 {
+        (self.x.powi(2) + self.y.powi(2) + self.z.powi(2)).sqrt()
+    }
 }

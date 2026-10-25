@@ -13,7 +13,7 @@ use geometry::point::point::Point3;
 use geometry::vector::vector::Vector3;
 use geometry::shape::sphere::Sphere;
 use geometry::shape::Shape;
-use geometry::unit::unit_enum::{GeometryUnits, GeometryUnits::*};
+use geometry::unit::unit_enum::GeometryUnits::*;
 
 fn main() {
     let mut sphere1 = Sphere::new(

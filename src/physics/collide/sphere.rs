@@ -7,7 +7,7 @@ impl Collidable for Sphere {
         match with {
             Shape::Sphere(sphere) => {
                 let d = (sphere.center.x - self.center.x).powi(2) + (sphere.center.y - self.center.y).powi(2) + (sphere.center.z - self.center.z).powi(2);
-                if d <= (self.radius.get_value_in_base() + sphere.radius.get_value_in_base()).powi(2) {
+                if d <= (self.radius + sphere.radius).powi(2) {
                     return true;
                 }
                 else {
