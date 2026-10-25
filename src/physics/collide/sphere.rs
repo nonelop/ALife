@@ -19,7 +19,4 @@ impl Collidable for Sphere {
             }
         }
     }
-    fn collide(&self, with: &Shape) {
-        
-    }
 }

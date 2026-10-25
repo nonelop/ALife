@@ -3,6 +3,7 @@ mod errors;
 mod geometry;
 mod physics;
 mod time;
+mod objects;
 
 use crate::physics::collide::Collidable;
 use crate::time::tick::tick;
