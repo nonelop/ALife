@@ -2,7 +2,7 @@ use crate::errors::GeometryErrors;
 use crate::geometry::point::point::Point3;
 use crate::geometry::unit::unit_enum::GeometryUnits;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Sphere {
     pub center: Point3,
     pub radius: GeometryUnits,

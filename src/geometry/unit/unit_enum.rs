@@ -73,4 +73,14 @@ impl GeometryUnits {
             _ => panic!(),
         }
     }
+    pub fn get_value_in_base(&self) -> f64 {
+        match self.to_base_unit() {
+            GeometryUnits::Nanometer(v) => v,
+            GeometryUnits::Micrometer(v) => v,
+            GeometryUnits::Millimeter(v) => v,
+            GeometryUnits::Centimeter(v) => v,
+            GeometryUnits::Meter(v) => v,
+            GeometryUnits::Kilometer(v) => v,
+        }
+    }
 }
