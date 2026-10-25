@@ -1,10 +1,10 @@
-# ALife
+# AUS
 
-**ALife** is an early-stage artificial universe simulation written in Rust.
+**AUS** is an early-stage artificial universe simulation written in Rust.
 It aims to model space geometry, time, physical laws, chemical reactions, and — eventually —
 emergent complex systems across multiple scales.
 
-> **Status:** `0.1.0-alpha`. Experimental. APIs and architecture will change.
+> **Status:** `0.1.1-alpha`. Experimental. APIs and architecture will change.
 
 ## What works now
 
@@ -26,7 +26,7 @@ See [`docs.md`](docs.md) for module-level details.
 Requirements: Rust toolchain (stable).
 
 ```bash
-git clone https://github.com/nonelop/ALife.git
-cd ALife
+git clone https://github.com/nonelop/AUS.git
+cd AUS
 cargo run
 ```
