@@ -2,7 +2,7 @@
 // it may won't be in the simulation.
 
 use crate::geometry::shape::Shape;
-use crate::physics::collide::Collidable;
+use crate::physics::collide::{Collidable, CollisionInfo};
 
 struct Atom {
     shape: Shape,
@@ -15,7 +15,11 @@ impl Collidable for Atom {
         self.shape.is_colliding(with)
     }
 
-    fn collide(&self, with: &Shape) {
+    fn get_collision_info(&self, with: &Shape) -> Option<CollisionInfo> {
+        self.shape.get_collision_info(with)
+    }
+
+    fn collide(&mut self, with: &mut Shape) {
         // I'll write later
     }
 }

@@ -37,6 +37,18 @@ impl Mul for Vector3 {
     }
 }
 
+impl Mul<Vector3> for f64 {
+    type Output = Vector3;
+
+    fn mul(self, v: Vector3) -> Vector3 {
+        Vector3 {
+            x: self * v.x,
+            y: self * v.y,
+            z: self * v.z,
+        }
+    }
+}
+
 impl Div for Vector3 {
     type Output = Vector3;
 

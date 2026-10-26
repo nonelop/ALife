@@ -1,6 +1,7 @@
 use super::Collidable;
 use crate::geometry::shape::sphere::Sphere;
 use crate::geometry::shape::Shape;
+use super::CollisionInfo;
 
 impl Collidable for Sphere {
     fn is_colliding(&self, with: &Shape) -> bool {
@@ -17,6 +18,29 @@ impl Collidable for Sphere {
             Shape::Cube(cube) => {
                 return false; // pass
             }
+        }
+    }
+    fn get_collision_info(&self, with: &Shape) -> Option<CollisionInfo> {
+        if self.is_colliding(with) {
+            match with {
+                Shape::Sphere(sphere) => {
+                    let depth = (self.radius + sphere.radius) - (self.center - sphere.center).length();
+                    let normal = (sphere.center - self.center).normalize();
+                    let contact_point = self.center + (self.radius * normal);
+
+                    Some(CollisionInfo {
+                        depth,
+                        normal,
+                        contact_point
+                    })
+                }
+                Shape::Cube(cube) => {
+                    None
+                }
+            }
+        }
+        else {
+            None
         }
     }
 }

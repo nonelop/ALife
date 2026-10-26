@@ -1,9 +1,9 @@
-use crate::geometry::point::point::Point3;
+use crate::geometry::vector::vector::Vector3;
 use crate::geometry::unit::unit_enum::GeometryUnits;
 
 #[derive(Debug, Clone, Copy)]
 pub struct Cube {
-    center: Point3,
+    center: Vector3,
     width: GeometryUnits,
     height: GeometryUnits,
     depth: GeometryUnits,

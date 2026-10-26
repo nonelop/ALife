@@ -5,12 +5,11 @@ mod physics;
 mod time;
 mod objects;
 
-use crate::physics::collide::Collidable;
+use crate::physics::collide::{Collidable, CollisionInfo};
 use crate::time::tick::tick;
 use std::time::Duration;
 use std::{println, thread};
 
-use geometry::point::point::Point3;
 use geometry::vector::vector::Vector3;
 use geometry::shape::sphere::Sphere;
 use geometry::shape::Shape;
@@ -18,7 +17,7 @@ use geometry::unit::unit_enum::GeometryUnits::*;
 
 fn main() {
     let mut sphere1 = Sphere::new(
-        Point3 {
+        Vector3 {
             x: -20.0,
             y: 0.0,
             z: 0.0,
@@ -28,7 +27,7 @@ fn main() {
     .unwrap();
 
     let mut sphere2 = Sphere::new(
-        Point3 {
+        Vector3 {
             x: 20.0,
             y: 0.0,
             z: 0.0,
@@ -53,6 +52,7 @@ fn main() {
 
         if sphere1.is_colliding(&Shape::Sphere(sphere2)) {
             println!("[INFO] [T: {}] Sphere1 colliding Sphere2", counter);
+            println!("[INFO] [T: {}] {:?}", counter, sphere1.get_collision_info(&Shape::Sphere(sphere2)));
         }
 
         tick();
