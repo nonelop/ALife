@@ -1,9 +1,9 @@
-use super::Collidable;
+use super::CollidableShape;
 use crate::geometry::shape::sphere::Sphere;
 use crate::geometry::shape::Shape;
 use super::CollisionInfo;
 
-impl Collidable for Sphere {
+impl CollidableShape for Sphere {
     fn is_colliding(&self, with: &Shape) -> bool {
         match with {
             Shape::Sphere(sphere) => {

@@ -11,8 +11,7 @@ pub struct CollisionInfo {
     pub contact_point: Vector3
 }
 
-pub trait Collidable {
+pub trait CollidableShape {
     fn is_colliding(&self, with: &Shape) -> bool;
     fn get_collision_info(&self, with: &Shape) -> Option<CollisionInfo>;
-    fn collide(&mut self, with: &mut Shape) {}
 }

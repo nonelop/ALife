@@ -6,6 +6,10 @@ pub struct Vector3 {
 }
 
 impl Vector3 {
+    pub fn zero() -> Self {
+        Vector3 { x: 0.0, y: 0.0, z: 0.0 }
+    }
+
     pub fn normalize(&self) -> Self {
         let vector_lengh = self.length();
 
