@@ -1,4 +1,6 @@
-- [ ] Move simulation to 3D
-- [ ] Change all coordinates from i32 to f32
-- [ ] Implement chunk system
-- [ ] Configure simulation ticks
+[ ] Implement collide() for Atom
+[ ] Make a container for objects in tick (like Vec<Atom>)
+[ ] Make Cube, implement sphere-cube collide
+[ ] Implement cube-cube, cube-sphere collide
+[ ] Add rotation for Cube
+[ ] !Write simple DOCS.md

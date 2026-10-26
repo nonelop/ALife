@@ -1,2 +1,2 @@
 ## ALife
-Current version: 0.1.0-alpha
+Current version: 0.1.1-alpha

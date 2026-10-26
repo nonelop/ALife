@@ -30,3 +30,11 @@ git clone https://github.com/nonelop/AUS.git
 cd AUS
 cargo run
 ```
+
+## DevLog
+
+You can follow the project on [Telegram channel](https://t.me/AUS_DevLog)
+
+---
+
+*AUS made by humans for hundred percent*
