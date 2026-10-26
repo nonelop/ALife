@@ -1,6 +1,7 @@
+[ TMRW ] Background - Body - Object (BBO) - very important for all the AUS
 [ ] Implement collide() for Atom
-[ ] Make a container for objects in tick (like Vec<Atom>)
+[ TMRW ] Make a container for objects in tick (like Vec<Atom>)
 [ ] Make Cube, implement sphere-cube collide
 [ ] Implement cube-cube, cube-sphere collide
 [ ] Add rotation for Cube
-[ ] !Write simple DOCS.md
+[ DONE ] !Write simple DOCS.md
