@@ -70,7 +70,7 @@ impl GeometryUnits {
     pub fn get_value_in_meters(&self) -> f64 {
         match self.to_meters() {
             GeometryUnits::Meter(v) => v,
-            _ => panic!(),
+            _ => panic!("get_value_in_meters"),
         }
     }
     pub fn get_value_in_base(&self) -> f64 {
