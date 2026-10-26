@@ -1,5 +1,5 @@
 use super::vector::Vector3;
-use std::ops::{Add, Sub, Mul, Div};
+use std::ops::{Add, Sub, Mul, Div, AddAssign};
 
 impl Add for Vector3 {
     type Output = Vector3;
@@ -10,6 +10,14 @@ impl Add for Vector3 {
             y: self.y + rhs.y,
             z: self.z + rhs.z
         }
+    }
+}
+
+impl AddAssign for Vector3 {
+    fn add_assign(&mut self, rhs: Self) {
+        self.x += rhs.x;
+        self.y += rhs.y;
+        self.z += rhs.z;
     }
 }
 

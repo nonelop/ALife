@@ -5,7 +5,8 @@ mod physics;
 mod time;
 mod objects;
 
-use crate::physics::collide::{CollidableShape, CollisionInfo};
+use crate::physics::collide::shape::CollidableShape;
+use crate::physics::collide::CollisionInfo;
 use crate::time::tick::tick;
 use std::time::Duration;
 use std::{println, thread};
@@ -30,10 +31,6 @@ fn main() {
     let mut counter = 0;
 
     loop {
-        thread::sleep(Duration::from_millis(100));
-
-        counter += 1;
-
         tick();
     }
 }

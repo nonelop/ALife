@@ -10,6 +10,11 @@ impl Vector3 {
         Vector3 { x: 0.0, y: 0.0, z: 0.0 }
     }
 
+    // just for syntax Vector3::new()
+    pub fn new(x: f64, y: f64, z: f64) -> Self {
+        Vector3 { x, y, z }
+    }
+
     pub fn normalize(&self) -> Self {
         let vector_lengh = self.length();
 
