@@ -7,7 +7,7 @@ use crate::physics::collide::body::CollidableBody;
 use crate::physics::moves::body::MoveableBody;
 use crate::physics::collide::shape::CollidableShape;
 use crate::physics::collide::CollisionInfo;
-use crate::body::Body;
+use crate::body::{Body, PhysicsBody};
 use crate::config::DELTA_TIME;
 
 pub struct Atom {
@@ -31,11 +31,9 @@ impl Body for Atom {
 
 impl CollidableBody for Atom {}
 
-impl MoveableBody for Atom {
-    fn move_with_velocity(&mut self) {
-        self.set_position(self.get_position() + (DELTA_TIME * self.get_velocity()));
-    }
-}
+impl MoveableBody for Atom {}
+
+impl PhysicsBody for Atom {}
 
 // wrapper for quick access to methods of atom's shape
 impl CollidableShape for Atom {
