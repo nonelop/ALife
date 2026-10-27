@@ -8,6 +8,8 @@ mod body;
 
 use crate::physics::collide::shape::CollidableShape;
 use crate::physics::collide::CollisionInfo;
+use crate::body::Body;
+use crate::physics::moves::body::MoveableBody;
 use crate::time::tick;
 use std::time::Duration;
 use std::{println, thread};
@@ -32,6 +34,13 @@ fn main() {
     let mut counter = 0;
 
     loop {
+        let velocity = Vector3::new(1.0, 0.25, 0.0);
+
+        atom1.set_velocity(velocity);
+        atom1.move_with_velocity();
+
+        println!("Atom position: {}", atom1.get_position());
+
         tick();
     }
 }

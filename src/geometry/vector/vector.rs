@@ -1,3 +1,5 @@
+use std::fmt;
+
 #[derive(Debug, Clone, Copy)]
 pub struct Vector3 {
     pub x: f64,
@@ -32,5 +34,11 @@ impl Vector3 {
 
     pub fn length(&self) -> f64 {
         (self.x.powi(2) + self.y.powi(2) + self.z.powi(2)).sqrt()
+    }
+}
+
+impl fmt::Display for Vector3 {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        return write!(f, "[{:.4}, {:.4}, {:.4}]", self.x, self.y, self.z);
     }
 }
