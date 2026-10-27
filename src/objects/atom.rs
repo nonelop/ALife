@@ -29,11 +29,7 @@ impl Body for Atom {
     fn set_velocity(&mut self, velocity: Vector3) {self.velocity = velocity}
 }
 
-impl CollidableBody for Atom {
-    fn collide(&mut self, with: &mut dyn Body, info: CollisionInfo) {
-        
-    }
-}
+impl CollidableBody for Atom {}
 
 impl MoveableBody for Atom {
     fn move_with_velocity(&mut self) {
