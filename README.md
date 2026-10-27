@@ -19,7 +19,7 @@ emergent complex systems across multiple scales.
 - Richer visualization
 - Performance and scalability improvements
 
-See [`docs.md`](docs.md) for module-level details.
+See [`DOCS.md`](DOCS.md) for module-level details.
 
 ## Quick Start
 
