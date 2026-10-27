@@ -3,8 +3,10 @@
 
 use crate::geometry::shape::Shape;
 use crate::geometry::vector::vector::Vector3;
+use crate::physics::collide::body::CollidableBody;
 use crate::physics::collide::shape::CollidableShape;
 use crate::physics::collide::CollisionInfo;
+use crate::body::Body;
 
 pub struct Atom {
     shape: Shape,
@@ -15,21 +17,19 @@ impl Atom {
     pub fn new(shape: Shape) -> Self {
         Atom { shape, velocity: Vector3::zero() }
     }
+}
 
-    pub fn set_position(&mut self, position: Vector3) {
-        match &mut self.shape {
-            Shape::Sphere(sphere) => {
-                sphere.center = position
-            }
-            Shape::Cube(cube) => {}
-        }
-    }
+impl Body for Atom {
+    fn get_shape(&self) -> Shape {self.shape}
+    fn set_shape(&mut self, shape: Shape) {self.shape = shape}
 
-    pub fn get_position(&self) -> Vector3 {
-        match &self.shape {
-            Shape::Sphere(sphere) => sphere.center,
-            Shape::Cube(cube) => Vector3::zero()
-        }
+    fn get_velocity(&self) -> Vector3 {self.velocity}
+    fn set_velocity(&mut self, velocity: Vector3) {self.velocity = velocity}
+}
+
+impl CollidableBody for Atom {
+    fn collide(&mut self, with: &mut dyn Body, info: CollisionInfo) {
+        
     }
 }
 

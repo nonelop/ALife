@@ -4,10 +4,11 @@ mod geometry;
 mod physics;
 mod time;
 mod objects;
+mod body;
 
 use crate::physics::collide::shape::CollidableShape;
 use crate::physics::collide::CollisionInfo;
-use crate::time::tick::tick;
+use crate::time::tick;
 use std::time::Duration;
 use std::{println, thread};
 use geometry::vector::vector::Vector3;
