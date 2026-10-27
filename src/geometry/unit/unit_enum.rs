@@ -2,7 +2,7 @@ use core::panic;
 
 use crate::config::BASE_GEOMETRY_UNIT;
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum GeometryUnits {
     Nanometer(f64),
     Micrometer(f64),

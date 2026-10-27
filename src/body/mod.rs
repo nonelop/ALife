@@ -1,4 +1,4 @@
-use crate::geometry::{shape::Shape, vector::vector::Vector3};
+use crate::{geometry::{shape::Shape, vector::vector::Vector3}, physics::{collide::body::CollidableBody, moves::body::MoveableBody}};
 
 pub trait Body {
     fn get_shape(&self) -> Shape;
@@ -28,3 +28,5 @@ pub trait Body {
         }
     }
 }
+
+pub trait PhysicsBody: Body + CollidableBody + MoveableBody {}
