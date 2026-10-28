@@ -1,4 +1,8 @@
-# AUS (Artificial Universe Simulation)
+# AUS (Artificial Universe Simulation)  
+
+![Status](https://img.shields.io/badge/status-alpha-orange)
+![Rust](https://img.shields.io/badge/rust-2024_edition-blue)
+![License](https://img.shields.io/badge/license-GPLv3-green)
 
 **AUS** is an engine and simulation written in Rust. It models Space, Time, Geometric calculations, and Physical laws, along with objects, and in the future, it will provide a space for the emergence of spontaneous reactions and events, such as chemistry and biology.
 
