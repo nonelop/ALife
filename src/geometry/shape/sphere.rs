@@ -1,6 +1,7 @@
 use crate::errors::GeometryErrors;
 use crate::geometry::vector::vector::Vector3;
 use crate::geometry::unit::unit_enum::GeometryUnits;
+use std::f64::consts::PI;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Sphere {
@@ -22,5 +23,8 @@ impl Sphere {
             center: position,
             radius: radius,
         })
+    }
+    pub fn get_volume(&self) -> f64 {
+        (4.0/3.0) * PI * self.radius.powi(3)
     }
 }
