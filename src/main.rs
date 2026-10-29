@@ -23,7 +23,7 @@ fn main() {
 
     let mut atom1 = Atom::new(
         Shape::Sphere(
-            Sphere::new(Vector3::new(-5.0, 0.0, 0.0), Nanometer(1.0)).unwrap()
+            Sphere::new(Vector3::new(-5.0, 0.0, 0.0), Nanometer(0.05)).unwrap()
     ));
 
     let mut atom2 = Atom::new(
@@ -36,10 +36,10 @@ fn main() {
     objects.push(Box::new(atom1));
     objects.push(Box::new(atom2));
     
-    let mut counter = 0;
+    let mut _counter = 0;
 
     loop {
-        println!("Atom2 velocity: {}", objects[1].get_velocity());
+        println!("Atom1: {} | Atom2: {}", objects[0].get_position(), objects[1].get_position());
 
         tick(&mut objects);
     }

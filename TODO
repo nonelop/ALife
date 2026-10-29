@@ -1,3 +1,5 @@
+[ ] Привести к еденицам СИ
+[ ] пофиксить collide/shape/shape.rs > mod.rs
 [ ] Make Cube, implement sphere-cube collide
 [ ] Implement cube-cube, cube-sphere collide
 [ ] Add rotation for Cube

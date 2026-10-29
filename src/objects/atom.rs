@@ -18,7 +18,7 @@ pub struct Atom {
 
 impl Atom {
     pub fn new(shape: Shape) -> Self {
-        Atom { shape, velocity: Vector3::zero(), density: 100000.0}
+        Atom { shape, velocity: Vector3::zero(), density: 1.0}
     }
 }
 
