@@ -1,7 +1,3 @@
 [ ] Make Cube, implement sphere-cube collide
 [ ] Implement cube-cube, cube-sphere collide
 [ ] Add rotation for Cube
-[ DONE ] !Write simple DOCS.md
-[ DONE ] Make a container for objects in tick
-[ DONE ] Background - Body - Object (BBO) - very important for all the AUS
-[ DONE ] Implement collide() for Atom

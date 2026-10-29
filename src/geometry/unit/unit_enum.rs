@@ -1,7 +1,5 @@
 use core::panic;
 
-use crate::config::BASE_GEOMETRY_UNIT;
-
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum GeometryUnits {
     Nanometer(f64),
@@ -14,14 +12,7 @@ pub enum GeometryUnits {
 
 impl GeometryUnits {
     pub fn to_base_unit(&self) -> Self {
-        match BASE_GEOMETRY_UNIT {
-            GeometryUnits::Nanometer(_v) => self.to_nanos(),
-            GeometryUnits::Micrometer(_v) => self.to_micros(),
-            GeometryUnits::Millimeter(_v) => self.to_millis(),
-            GeometryUnits::Centimeter(_v) => self.to_centis(),
-            GeometryUnits::Meter(_v) => self.to_meters(),
-            GeometryUnits::Kilometer(_v) => self.to_kilos(),
-        }
+        self.to_meters()
     }
 
     pub fn to_meters(&self) -> Self {
@@ -75,12 +66,8 @@ impl GeometryUnits {
     }
     pub fn get_value_in_base(&self) -> f64 {
         match self.to_base_unit() {
-            GeometryUnits::Nanometer(v) => v,
-            GeometryUnits::Micrometer(v) => v,
-            GeometryUnits::Millimeter(v) => v,
-            GeometryUnits::Centimeter(v) => v,
             GeometryUnits::Meter(v) => v,
-            GeometryUnits::Kilometer(v) => v,
+            _ => panic!("get_value_in_base")
         }
     }
 }

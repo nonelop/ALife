@@ -25,7 +25,7 @@ impl CollidableShape for Sphere {
             match with {
                 Shape::Sphere(sphere) => {
                     let depth = (self.radius + sphere.radius) - (self.center - sphere.center).length();
-                    let normal = (sphere.center - self.center).normalize();
+                    let normal = (self.center - sphere.center).normalize();
                     let contact_point = self.center + (self.radius * normal);
 
                     Some(CollisionInfo {
