@@ -35,6 +35,10 @@ impl Vector3 {
     pub fn length(&self) -> f64 {
         (self.x.powi(2) + self.y.powi(2) + self.z.powi(2)).sqrt()
     }
+
+    pub fn dot(&self, b: &Vector3) -> f64 {
+        return self.x * b.x + self.y * b.y + self.z + b.z;
+    } 
 }
 
 impl fmt::Display for Vector3 {

@@ -1,7 +1,7 @@
 // This is just an attempt to make some object based on what already exists.
 // it may won't be in the simulation.
 
-use crate::geometry::shape::Shape;
+use crate::geometry::shape::{GeometryShape, Shape};
 use crate::geometry::vector::vector::Vector3;
 use crate::physics::collide::body::CollidableBody;
 use crate::physics::moves::body::MoveableBody;
@@ -12,12 +12,13 @@ use crate::config::DELTA_TIME;
 
 pub struct Atom {
     shape: Shape,
-    pub velocity: Vector3
+    pub velocity: Vector3,
+    density: f64
 }
 
 impl Atom {
     pub fn new(shape: Shape) -> Self {
-        Atom { shape, velocity: Vector3::zero() }
+        Atom { shape, velocity: Vector3::zero(), density: 1.0}
     }
 }
 
@@ -27,6 +28,10 @@ impl Body for Atom {
 
     fn get_velocity(&self) -> Vector3 {self.velocity}
     fn set_velocity(&mut self, velocity: Vector3) {self.velocity = velocity}
+
+    fn get_mass_f64(&self) -> f64 {
+        self.density * self.get_shape().get_volume_f64()
+    }
 }
 
 impl CollidableBody for Atom {}

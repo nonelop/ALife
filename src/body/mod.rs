@@ -7,6 +7,8 @@ pub trait Body {
     fn get_velocity(&self) -> Vector3;
     fn set_velocity(&mut self, velocity: Vector3);
 
+    fn get_mass_f64(&self) -> f64; // Return mass value in f64
+
     fn get_position(&self) -> Vector3 {
         let shape = self.get_shape();
 
