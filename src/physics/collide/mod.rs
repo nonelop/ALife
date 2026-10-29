@@ -1,4 +1,3 @@
-pub mod shape;
 pub mod body;
 
 use crate::geometry::vector::vector::Vector3;

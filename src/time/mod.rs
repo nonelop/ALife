@@ -1,5 +1,5 @@
 use crate::body::{Body, PhysicsBody};
-use crate::physics::collide::shape::CollidableShape;
+use crate::geometry::shape::CollidableShape;
 use crate::physics::moves::body::MoveableBody;
 use crate::config::DELTA_TIME;
 use std::thread::sleep;

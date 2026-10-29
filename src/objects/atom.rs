@@ -3,9 +3,9 @@
 
 use crate::geometry::shape::{GeometryShape, Shape};
 use crate::geometry::vector::vector::Vector3;
+use crate::geometry::shape::CollidableShape;
 use crate::physics::collide::body::CollidableBody;
 use crate::physics::moves::body::MoveableBody;
-use crate::physics::collide::shape::CollidableShape;
 use crate::physics::collide::CollisionInfo;
 use crate::body::{Body, PhysicsBody};
 use crate::config::DELTA_TIME;
@@ -29,8 +29,8 @@ impl Body for Atom {
     fn get_velocity(&self) -> Vector3 {self.velocity}
     fn set_velocity(&mut self, velocity: Vector3) {self.velocity = velocity}
 
-    fn get_mass_f64(&self) -> f64 {
-        self.density * self.get_shape().get_volume_f64()
+    fn get_mass(&self) -> f64 {
+        self.density * self.get_shape().get_volume()
     }
 }
 

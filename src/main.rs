@@ -7,7 +7,7 @@ mod objects;
 mod body;
 
 use crate::physics::collide::body::CollidableBody;
-use crate::physics::collide::shape::CollidableShape;
+use crate::geometry::shape::CollidableShape;
 use crate::body::{Body, PhysicsBody};
 use crate::physics::moves::body::MoveableBody;
 use crate::time::tick;
