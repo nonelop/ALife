@@ -16,6 +16,7 @@ pub enum Shape {
 // basic shape methods
 pub trait GeometryShape {
     fn get_center(&self) -> Vector3;
+    fn get_radius(&self) -> f64;
     fn get_volume(&self) -> f64;
 }
 
@@ -31,6 +32,12 @@ impl GeometryShape for Shape {
         match self {
             Shape::Sphere(sphere) => sphere.get_center(),
             _ => Vector3::zero()
+        }
+    }
+    fn get_radius(&self) -> f64 {
+        match self {
+            Self::Sphere(sphere) => sphere.get_radius(),
+            _ => 0.0
         }
     }
     fn get_volume(&self) -> f64 {
