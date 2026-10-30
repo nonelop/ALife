@@ -1,15 +1,12 @@
-use crate::body::{Body, PhysicsBody};
 use crate::geometry::shape::CollidableShape;
-use crate::physics::moves::body::MoveableBody;
-use crate::config::DELTA_TIME;
-use std::thread::sleep;
-use std::time::Duration;
+use crate::physics::body::PhysicsBody;
 
-pub fn tick(objects: &mut Vec<Box<dyn PhysicsBody>>) {
+
+pub fn tick(dt: f64, objects: &mut Vec<Box<dyn PhysicsBody>>) {
     let len = objects.len();
 
     for obj in &mut *objects {
-        obj.move_with_velocity();
+        obj.move_with_velocity(dt);
     }
 
     for i in 0..len {
@@ -22,12 +19,9 @@ pub fn tick(objects: &mut Vec<Box<dyn PhysicsBody>>) {
             let shape = obj.get_shape();
             let with_shape = with_obj.get_shape();
 
-            if with_shape != shape {
-                if shape.is_colliding(&with_shape) {
-                    obj.collide( &mut **with_obj, shape.get_collision_info(&with_shape).unwrap());
-                }
+            if shape.is_colliding_with(&with_shape) {
+                obj.collide( &mut **with_obj, shape.get_collision_info_with(&with_shape).unwrap());
             }
         }
     }
-    sleep(Duration::from_secs_f64(DELTA_TIME));
 }

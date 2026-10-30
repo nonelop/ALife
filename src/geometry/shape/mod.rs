@@ -3,7 +3,7 @@ pub mod sphere;
 
 use cube::Cube;
 use sphere::Sphere;
-use crate::geometry::vector::vector::Vector3;
+use crate::geometry::vector::Vector3;
 use crate::physics::collide::CollisionInfo;
 
 // enum for group all shapes to one object
@@ -21,8 +21,8 @@ pub trait GeometryShape {
 
 // methods for shape which can collide with other shapes
 pub trait CollidableShape {
-    fn is_colliding(&self, with: &Shape) -> bool;
-    fn get_collision_info(&self, with: &Shape) -> Option<CollisionInfo>;
+    fn is_colliding_with(&self, with: &Shape) -> bool;
+    fn get_collision_info_with(&self, with: &Shape) -> Option<CollisionInfo>;
 }
 
 // wrapper which links to real implements
@@ -43,16 +43,16 @@ impl GeometryShape for Shape {
 
 // wrapper which links to real implements
 impl CollidableShape for Shape {
-    fn is_colliding(&self, with: &Shape) -> bool {
+    fn is_colliding_with(&self, with: &Shape) -> bool {
         match self {
-            Self::Sphere(sphere) => sphere.is_colliding(with),
-            Self::Cube(cube) => false
+            Self::Sphere(sphere) => sphere.is_colliding_with(with),
+            Self::Cube(_cube) => false
         }
     }
-    fn get_collision_info(&self, with: &Shape) -> Option<CollisionInfo> {
+    fn get_collision_info_with(&self, with: &Shape) -> Option<CollisionInfo> {
         match self {
-            Self::Sphere(sphere) => sphere.get_collision_info(with),
-            Self::Cube(cube) => None
+            Self::Sphere(sphere) => sphere.get_collision_info_with(with),
+            Self::Cube(_cube) => None
         }
     }
 }

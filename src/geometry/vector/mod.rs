@@ -1,2 +1,50 @@
-pub mod vector;
 pub mod ops;
+
+use std::fmt;
+
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct Vector3 {
+    pub x: f64,
+    pub y: f64,
+    pub z: f64,
+}
+
+impl Vector3 {
+    pub fn zero() -> Self {
+        Vector3 { x: 0.0, y: 0.0, z: 0.0 }
+    }
+
+    // just for syntax Vector3::new()
+    pub fn new(x: f64, y: f64, z: f64) -> Self {
+        Vector3 { x, y, z }
+    }
+
+    pub fn normalize(&self) -> Self {
+        let vector_lengh = self.length();
+
+        if vector_lengh > 0.0 {
+            let nx = self.x / vector_lengh;
+            let ny = self.y / vector_lengh;
+            let nz = self.z / vector_lengh;
+
+            Vector3 { x: nx, y: ny, z: nz }
+        }
+        else {
+            *self
+        }
+    }
+
+    pub fn length(&self) -> f64 {
+        (self.x.powi(2) + self.y.powi(2) + self.z.powi(2)).sqrt()
+    }
+
+    pub fn dot(&self, b: &Vector3) -> f64 {
+        return self.x * b.x + self.y * b.y + self.z * b.z;
+    } 
+}
+
+impl fmt::Display for Vector3 {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        return write!(f, "[{:.4}, {:.4}, {:.4}]", self.x, self.y, self.z);
+    }
+}

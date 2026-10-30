@@ -1,7 +1,7 @@
 use crate::errors::GeometryErrors;
 use crate::geometry::shape::GeometryShape;
-use crate::geometry::vector::vector::Vector3;
-use crate::geometry::unit::unit_enum::GeometryUnits;
+use crate::geometry::vector::Vector3;
+use crate::geometry::unit::GeometryUnits;
 use crate::physics::collide::CollisionInfo;
 use super::CollidableShape;
 use super::Shape;
@@ -38,7 +38,7 @@ impl GeometryShape for Sphere {
 }
 
 impl CollidableShape for Sphere {
-    fn is_colliding(&self, with: &Shape) -> bool {
+    fn is_colliding_with(&self, with: &Shape) -> bool {
         match with {
             Shape::Sphere(sphere) => {
                 let d = (sphere.center.x - self.center.x).powi(2) + (sphere.center.y - self.center.y).powi(2) + (sphere.center.z - self.center.z).powi(2);
@@ -49,13 +49,13 @@ impl CollidableShape for Sphere {
                     return false;
                 }
             }
-            Shape::Cube(cube) => {
+            Shape::Cube(_cube) => {
                 return false; // pass
             }
         }
     }
-    fn get_collision_info(&self, with: &Shape) -> Option<CollisionInfo> {
-        if self.is_colliding(with) {
+    fn get_collision_info_with(&self, with: &Shape) -> Option<CollisionInfo> {
+        if self.is_colliding_with(with) {
             match with {
                 Shape::Sphere(sphere) => {
                     let depth = (self.radius + sphere.radius) - (self.center - sphere.center).length();
@@ -68,7 +68,7 @@ impl CollidableShape for Sphere {
                         contact_point
                     })
                 }
-                Shape::Cube(cube) => {
+                Shape::Cube(_cube) => {
                     None
                 }
             }

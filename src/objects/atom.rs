@@ -1,14 +1,9 @@
-// This is just an attempt to make some object based on what already exists.
-// it may won't be in the simulation.
-
 use crate::geometry::shape::{GeometryShape, Shape};
-use crate::geometry::vector::vector::Vector3;
-use crate::geometry::shape::CollidableShape;
+use crate::geometry::vector::Vector3;
 use crate::physics::collide::body::CollidableBody;
 use crate::physics::moves::body::MoveableBody;
-use crate::physics::collide::CollisionInfo;
-use crate::body::{Body, PhysicsBody};
-use crate::config::DELTA_TIME;
+use crate::physics::body::PhysicsBody;
+use crate::body::Body;
 
 pub struct Atom {
     shape: Shape,
@@ -39,14 +34,3 @@ impl CollidableBody for Atom {}
 impl MoveableBody for Atom {}
 
 impl PhysicsBody for Atom {}
-
-// wrapper for quick access to methods of atom's shape
-impl CollidableShape for Atom {
-    fn is_colliding(&self, with: &Shape) -> bool {
-        self.shape.is_colliding(with)
-    }
-
-    fn get_collision_info(&self, with: &Shape) -> Option<CollisionInfo> {
-        self.shape.get_collision_info(with)
-    }
-}
