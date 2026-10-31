@@ -1,5 +1,5 @@
-use crate::{geometry::{shape::Shape, vector::vector::Vector3}, physics::{collide::body::CollidableBody, moves::body::MoveableBody}};
-
+use crate::geometry::shape::Shape; 
+use crate::geometry::vector::Vector3; 
 pub trait Body {
     fn get_shape(&self) -> Shape;
     fn set_shape(&mut self, shape: Shape);
@@ -7,14 +7,14 @@ pub trait Body {
     fn get_velocity(&self) -> Vector3;
     fn set_velocity(&mut self, velocity: Vector3);
 
-    fn get_mass_f64(&self) -> f64; // Return mass value in f64
+    fn get_mass(&self) -> f64; // Return mass value in kg
 
     fn get_position(&self) -> Vector3 {
         let shape = self.get_shape();
 
         match shape {
             Shape::Sphere(sphere) => sphere.center,
-            Shape::Cube(cube) => Vector3::zero(),
+            Shape::Cube(_cube) => Vector3::zero(),
         }
     }
     fn set_position(&mut self, position: Vector3) {
@@ -26,9 +26,7 @@ pub trait Body {
 
                 self.set_shape(Shape::Sphere(*sphere));
             }
-            Shape::Cube(cube) => {}
+            Shape::Cube(_cube) => {}
         }
     }
 }
-
-pub trait PhysicsBody: Body + CollidableBody + MoveableBody {}

@@ -1,46 +1,48 @@
-mod config;
-mod errors;
 mod geometry;
 mod physics;
-mod time;
-mod objects;
 mod body;
+mod objects;
+mod time;
+mod errors;
+mod config;
+mod visual;
+mod world;
 
-use crate::physics::collide::body::CollidableBody;
-use crate::physics::collide::shape::CollidableShape;
-use crate::body::{Body, PhysicsBody};
-use crate::physics::moves::body::MoveableBody;
-use crate::time::tick;
-use std::println;
-use geometry::vector::vector::Vector3;
-use geometry::shape::sphere::Sphere;
-use geometry::shape::Shape;
-use geometry::unit::unit_enum::GeometryUnits::*;
-use objects::atom::Atom;
+use kiss3d::prelude::*;
 
-fn main() {
-    let mut objects: Vec<Box<dyn PhysicsBody>> = Vec::new();
+use crate::geometry::unit::GeometryUnits::Meter;
+use crate::geometry::vector::Vector3;
+use crate::geometry::shape::{Shape, sphere::Sphere};
+use crate::objects::atom::Atom;
+use crate::config::DELTA_TIME;
+use crate::visual::Visual;
+use crate::world::World;
+use crate::world::BodyId;
 
-    let mut atom1 = Atom::new(
-        Shape::Sphere(
-            Sphere::new(Vector3::new(-5.0, 0.0, 0.0), Nanometer(0.05)).unwrap()
-    ));
+#[kiss3d::main]
+async fn main() {
+    let mut world = World::new();
+    let mut visual = Visual::new();
 
-    let mut atom2 = Atom::new(
-        Shape::Sphere(
-            Sphere::new(Vector3::zero(), Nanometer(1.0)).unwrap()
-    ));
+    let mut window = Window::new("SIMULATION").await;
+    let mut camera = OrbitCamera3d::default();
 
-    atom1.set_velocity(Vector3::new(0.5, 0.0, 0.0));
+    let atom = world.spawn(Box::new(Atom::new(
+        Shape::Sphere(Sphere::new(Vector3::new(0.0, 0.25, 0.15), Meter(1.0)).unwrap())
+    )));
 
-    objects.push(Box::new(atom1));
-    objects.push(Box::new(atom2));
+    let atom2 = world.spawn(Box::new(Atom::new(
+        Shape::Sphere(Sphere::new(Vector3::new(20.0, 0.0, 0.0), Meter(1.0)).unwrap())
+    )));
+
+    let atom3 = world.spawn(Box::new(Atom::new(
+        Shape::Sphere(Sphere::new(Vector3::new(25.0, 0.0, 0.2), Meter(0.25)).unwrap())
+    )));
     
-    let mut _counter = 0;
+    world.get_mut_body(atom).unwrap().set_velocity(Vector3::new(4.0, 0.0, 0.0));
 
-    loop {
-        println!("Atom1: {} | Atom2: {}", objects[0].get_position(), objects[1].get_position());
-
-        tick(&mut objects);
+    while window.render_3d(&mut visual.scene, &mut camera).await {
+        time::tick(DELTA_TIME, &mut world);
+        visual.update(&world);
     }
 }

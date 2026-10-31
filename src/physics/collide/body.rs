@@ -4,8 +4,8 @@ use crate::physics::collide::CollisionInfo;
 pub trait CollidableBody: Body {
     fn collide(&mut self, with: &mut dyn Body, info: CollisionInfo) {
 
-        let self_mass = self.get_mass_f64();
-        let with_mass = with.get_mass_f64();
+        let self_mass = self.get_mass();
+        let with_mass = with.get_mass();
 
         let inv_self_mass = if self_mass <= 0.0 {0.0} else {1.0 / self_mass};
         let inv_with_mass = if with_mass <= 0.0 {0.0} else {1.0 / with_mass};

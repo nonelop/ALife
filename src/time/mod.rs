@@ -1,33 +1,35 @@
-use crate::body::{Body, PhysicsBody};
-use crate::physics::collide::shape::CollidableShape;
-use crate::physics::moves::body::MoveableBody;
-use crate::config::DELTA_TIME;
-use std::thread::sleep;
-use std::time::Duration;
+use crate::geometry::shape::CollidableShape;
+use crate::world::{BodyId, World};
 
-pub fn tick(objects: &mut Vec<Box<dyn PhysicsBody>>) {
-    let len = objects.len();
 
-    for obj in &mut *objects {
-        obj.move_with_velocity();
+pub fn tick(dt: f64, world: &mut World) {
+
+    let mut objects = world.get_body_ids();
+
+    for obj in &mut objects {
+        let obj = world.get_mut_body(*obj).unwrap();
+        obj.move_with_velocity(dt);
     }
 
-    for i in 0..len {
-        for j in (i + 1)..len {
-            let (left, right) = objects.split_at_mut(j);
+    for obj in objects.iter() {
+        for with in objects.iter() {
+            if obj != with {            
+                let (obj_body, with_body) = world.get_many_mut_body(*obj, *with).unwrap();
 
-            let obj = &mut left[i];
-            let with_obj = &mut right[0];
+                if obj_body.get_shape().is_colliding_with(
+                    &with_body.get_shape()
+                ) {
+                    let info = obj_body
+                    .get_shape()
+                    .get_collision_info_with(&with_body.get_shape())
+                    .unwrap();
 
-            let shape = obj.get_shape();
-            let with_shape = with_obj.get_shape();
-
-            if with_shape != shape {
-                if shape.is_colliding(&with_shape) {
-                    obj.collide( &mut **with_obj, shape.get_collision_info(&with_shape).unwrap());
+                    obj_body.collide(
+                        with_body,
+                        info
+                    );
                 }
             }
         }
     }
-    sleep(Duration::from_secs_f64(DELTA_TIME));
 }

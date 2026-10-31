@@ -1,4 +1,4 @@
-use crate::geometry::unit::unit_enum::{GeometryUnits, GeometryUnits::*};
+use crate::geometry::unit::{GeometryUnits, GeometryUnits::*};
 
 pub const DELTA_TIME: f64 = 0.01; // Tick speed in secs
 

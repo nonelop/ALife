@@ -1,4 +1,4 @@
-use super::vector::Vector3;
+use super::Vector3;
 use std::ops::{Add, Sub, Mul, Div, AddAssign};
 
 impl Add for Vector3 {
