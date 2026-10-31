@@ -32,6 +32,7 @@ impl Sphere {
 
 impl GeometryShape for Sphere {
     fn get_center(&self) -> Vector3 { self.center }
+    fn get_radius(&self) -> f64 { self.radius }
     fn get_volume(&self) -> f64 {
         (4.0/3.0) * PI * self.radius.powi(3)
     }
