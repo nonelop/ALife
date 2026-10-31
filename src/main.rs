@@ -10,6 +10,7 @@ mod world;
 
 use kiss3d::prelude::*;
 
+use crate::geometry::shape::cube::Cube;
 use crate::geometry::unit::GeometryUnits::Meter;
 use crate::geometry::vector::Vector3;
 use crate::geometry::shape::{Shape, sphere::Sphere};
@@ -30,12 +31,12 @@ async fn main() {
         Shape::Sphere(Sphere::new(Vector3::new(0.0, 0.25, 0.15), Meter(1.0)).unwrap())
     )));
 
-    let atom2 = world.spawn(Box::new(Atom::new(
+    let _atom2 = world.spawn(Box::new(Atom::new(
         Shape::Sphere(Sphere::new(Vector3::new(20.0, 0.0, 0.0), Meter(1.0)).unwrap())
     )));
 
-    let atom3 = world.spawn(Box::new(Atom::new(
-        Shape::Sphere(Sphere::new(Vector3::new(25.0, 0.0, 0.2), Meter(0.25)).unwrap())
+    let _cube = world.spawn(Box::new(Atom::new(
+        Shape::Cube(Cube::new(Vector3::new(0.0, 5.0, 0.0), Meter(1.0)).unwrap())
     )));
     
     world.get_mut_body(atom).unwrap().set_velocity(Vector3::new(4.0, 0.0, 0.0));
