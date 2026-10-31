@@ -17,7 +17,6 @@ use crate::objects::atom::Atom;
 use crate::config::DELTA_TIME;
 use crate::visual::Visual;
 use crate::world::World;
-use crate::world::BodyId;
 
 #[kiss3d::main]
 async fn main() {
