@@ -49,7 +49,6 @@ impl Visual {
             if let Some(mut node) = self.body_node_map.remove(&i) {
                 node.remove();
             }
-
         }
     }
 }

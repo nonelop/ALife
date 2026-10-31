@@ -36,7 +36,7 @@ async fn main() {
     )));
 
     let _cube = world.spawn(Box::new(Atom::new(
-        Shape::Cube(Cube::new(Vector3::new(0.0, 5.0, 0.0), Meter(1.0)).unwrap())
+        Shape::Cube(Cube::new(Vector3::new(0.0, 2.0, 0.0), Meter(1.0)).unwrap())
     )));
     
     world.get_mut_body(atom).unwrap().set_velocity(Vector3::new(4.0, 0.0, 0.0));
