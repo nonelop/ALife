@@ -1,7 +1,5 @@
-use crate::geometry::shape::{CollidableShape, Shape}; 
+use crate::geometry::shape::Shape; 
 use crate::geometry::vector::Vector3; 
-use crate::physics::{collide::body::CollidableBody, moves::body::MoveableBody};
-
 pub trait Body {
     fn get_shape(&self) -> Shape;
     fn set_shape(&mut self, shape: Shape);
@@ -16,7 +14,7 @@ pub trait Body {
 
         match shape {
             Shape::Sphere(sphere) => sphere.center,
-            Shape::Cube(cube) => Vector3::zero(),
+            Shape::Cube(_cube) => Vector3::zero(),
         }
     }
     fn set_position(&mut self, position: Vector3) {
@@ -28,7 +26,7 @@ pub trait Body {
 
                 self.set_shape(Shape::Sphere(*sphere));
             }
-            Shape::Cube(cube) => {}
+            Shape::Cube(_cube) => {}
         }
     }
 }

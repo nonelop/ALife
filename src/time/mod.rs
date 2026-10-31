@@ -1,26 +1,32 @@
 use crate::geometry::shape::CollidableShape;
-use crate::physics::body::PhysicsBody;
+use crate::world::{BodyId, World};
 
 
-pub fn tick(dt: f64, objects: &mut Vec<Box<dyn PhysicsBody>>) {
-    let len = objects.len();
+pub fn tick(dt: f64, world: &mut World, objects: &mut Vec<BodyId>) {
 
     for obj in &mut *objects {
+        let obj = world.get_mut_body(*obj).unwrap();
         obj.move_with_velocity(dt);
     }
 
-    for i in 0..len {
-        for j in (i + 1)..len {
-            let (left, right) = objects.split_at_mut(j);
+    for obj in objects.iter() {
+        for with in objects.iter() {
+            if obj != with {            
+                let (obj_body, with_body) = world.get_many_mut_body(*obj, *with).unwrap();
 
-            let obj = &mut left[i];
-            let with_obj = &mut right[0];
+                if obj_body.get_shape().is_colliding_with(
+                    &with_body.get_shape()
+                ) {
+                    let info = obj_body
+                    .get_shape()
+                    .get_collision_info_with(&with_body.get_shape())
+                    .unwrap();
 
-            let shape = obj.get_shape();
-            let with_shape = with_obj.get_shape();
-
-            if shape.is_colliding_with(&with_shape) {
-                obj.collide( &mut **with_obj, shape.get_collision_info_with(&with_shape).unwrap());
+                    obj_body.collide(
+                        with_body,
+                        info
+                    );
+                }
             }
         }
     }

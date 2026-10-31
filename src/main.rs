@@ -5,51 +5,54 @@ mod objects;
 mod time;
 mod errors;
 mod config;
+mod visual;
+mod world;
 
 use kiss3d::prelude::*;
 
 use crate::geometry::unit::GeometryUnits::Meter;
 use crate::geometry::vector::Vector3;
 use crate::geometry::shape::{Shape, sphere::Sphere};
-use crate::geometry::shape::GeometryShape;
 use crate::objects::atom::Atom;
 use crate::config::DELTA_TIME;
-use crate::physics::body::PhysicsBody;
+use crate::world::World;
+use crate::world::BodyId;
 
 #[kiss3d::main]
 async fn main() {
+    let mut world = World::new();
+
     let mut window = Window::new("Simulation: AUS").await;
     let mut camera = OrbitCamera3d::default();
     let mut scene = SceneNode3d::empty();
 
-    let mut objects: Vec<Box<dyn PhysicsBody>> = Vec::new();
+    let mut objects: Vec<BodyId> = Vec::new();
 
-    let mut atom = Atom::new(
+    let atom = world.spawn(Box::new(Atom::new(
         Shape::Sphere(Sphere::new(Vector3::new(0.0, 0.25, 0.15), Meter(1.0)).unwrap())
-    );
+    )));
 
-    let mut atom2 = Atom::new(
+    let mut atom2 = world.spawn(Box::new(Atom::new(
         Shape::Sphere(Sphere::new(Vector3::new(20.0, 0.0, 0.0), Meter(1.0)).unwrap())
-    );
+    )));
 
-    objects.push(Box::new(atom));
-    objects.push(Box::new(atom2));
+    objects.push(atom);
+    objects.push(atom2);
 
-    let mut atom_sphere = scene.add_sphere(
-        objects[0].get_shape().get_radius() as f32
-    );
-    let mut atom2_sphere = scene.add_sphere(
-        objects[1].get_shape().get_radius() as f32
-    );
-
-
-    objects[0].set_velocity(Vector3::new(5.0, 0.0, 0.0));
+    world.get_mut_body(atom).unwrap().set_velocity(Vector3::new(4.0, 0.0, 0.0));
 
     while window.render_3d(&mut scene, &mut camera).await {
-        time::tick(DELTA_TIME, &mut objects);
+        time::tick(DELTA_TIME, &mut world, &mut objects);
 
-        atom_sphere.set_position(vector3_to_vec3(&objects[0].get_position()));
-        atom2_sphere.set_position(vector3_to_vec3(&objects[1].get_position()));
+        let atom_pos = world.get_mut_body(atom).unwrap().get_position();
+        let atom2_pos = world.get_mut_body(atom).unwrap().get_position();
+
+        world.get_mut_node(atom).unwrap().set_position(
+            vector3_to_vec3(&atom_pos)
+        );
+        world.get_mut_node(atom2).unwrap().set_position(
+            vector3_to_vec3(&atom2_pos)
+        );
     }
 }
 
