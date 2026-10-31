@@ -2,9 +2,11 @@ use crate::geometry::shape::CollidableShape;
 use crate::world::{BodyId, World};
 
 
-pub fn tick(dt: f64, world: &mut World, objects: &mut Vec<BodyId>) {
+pub fn tick(dt: f64, world: &mut World) {
 
-    for obj in &mut *objects {
+    let mut objects = world.get_body_ids();
+
+    for obj in &mut objects {
         let obj = world.get_mut_body(*obj).unwrap();
         obj.move_with_velocity(dt);
     }

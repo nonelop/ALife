@@ -46,7 +46,10 @@ impl Visual {
         }
 
         for i in to_delete {
-            self.body_node_map.remove(&i);
+            if let Some(mut node) = self.body_node_map.remove(&i) {
+                node.remove();
+            }
+
         }
     }
 }

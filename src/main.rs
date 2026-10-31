@@ -27,8 +27,6 @@ async fn main() {
     let mut window = Window::new("SIMULATION").await;
     let mut camera = OrbitCamera3d::default();
 
-    let mut objects: Vec<BodyId> = Vec::new();
-
     let atom = world.spawn(Box::new(Atom::new(
         Shape::Sphere(Sphere::new(Vector3::new(0.0, 0.25, 0.15), Meter(1.0)).unwrap())
     )));
@@ -40,15 +38,11 @@ async fn main() {
     let atom3 = world.spawn(Box::new(Atom::new(
         Shape::Sphere(Sphere::new(Vector3::new(25.0, 0.0, 0.2), Meter(0.25)).unwrap())
     )));
-
-    objects.push(atom);
-    objects.push(atom2);
-    objects.push(atom3);
     
     world.get_mut_body(atom).unwrap().set_velocity(Vector3::new(4.0, 0.0, 0.0));
 
     while window.render_3d(&mut visual.scene, &mut camera).await {
-        time::tick(DELTA_TIME, &mut world, &mut objects);
+        time::tick(DELTA_TIME, &mut world);
         visual.update(&world);
     }
 }

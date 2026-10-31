@@ -27,6 +27,10 @@ impl World {
         BodyId(id)
     }
 
+    pub fn despawn(&mut self, id: BodyId) {
+        self.body_id_map.remove(&id);
+    }
+
     pub fn get_body_ids(&self) -> Vec<BodyId> {
         let mut vec: Vec<BodyId> = Vec::new();
 
